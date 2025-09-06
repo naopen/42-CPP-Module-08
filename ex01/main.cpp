@@ -12,6 +12,7 @@
 
 #include "Span.hpp"
 #include <iostream>
+#include <sstream>  // For stringstream in C++98
 #include <cstdlib>
 #include <ctime>
 #include <list>
@@ -24,6 +25,14 @@
 #define BLUE    "\033[34m"
 #define MAGENTA "\033[35m"
 #define CYAN    "\033[36m"
+
+// Helper function to convert int to string (C++98 compatible)
+std::string intToString(int value)
+{
+	std::ostringstream oss;
+	oss << value;
+	return oss.str();
+}
 
 void printTestHeader(const std::string& test_name)
 {
@@ -63,7 +72,7 @@ void testSubjectExample()
 			printSuccess("Shortest span is correct (2)");
 		else
 			printError("Shortest span is incorrect (expected 2, got " + 
-				std::to_string(shortest) + ")");
+				intToString(shortest) + ")");
 	}
 	catch(const std::exception& e)
 	{
@@ -78,7 +87,7 @@ void testSubjectExample()
 			printSuccess("Longest span is correct (14)");
 		else
 			printError("Longest span is incorrect (expected 14, got " + 
-				std::to_string(longest) + ")");
+				intToString(longest) + ")");
 	}
 	catch(const std::exception& e)
 	{
@@ -267,7 +276,7 @@ void testLargeSpan()
 	
 	if (bigSpan.size() == SIZE)
 	{
-		printSuccess("Successfully added " + std::to_string(SIZE) + " elements");
+		printSuccess("Successfully added " + intToString(SIZE) + " elements");
 		std::cout << "  Time taken: " << time_taken << " seconds" << std::endl;
 	}
 	else
@@ -328,7 +337,7 @@ void testEdgeCases()
 	{
 		int longest = sp1.longestSpan();
 		if (longest == 200)
-			printSuccess("Longest span with negative numbers: " + std::to_string(longest));
+			printSuccess("Longest span with negative numbers: " + intToString(longest));
 		else
 			printError("Incorrect longest span with negatives");
 	}
